@@ -1,14 +1,24 @@
 import React, { useState } from "react";
 import "./App.css";
 import { questions } from "./components/data";
-import { HomePage } from "./components/HomePage";
+import { QuestionsPage } from "./components/questionsPage";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { HomePage } from "./components/homePage";
 
 function App() {
   return (
     <>
-      <div className="app">
-        <HomePage />
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+
+          <Route exact path="/game">
+            <QuestionsPage />
+          </Route>
+        </Switch>
+      </Router>
     </>
   );
 }
