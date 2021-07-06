@@ -8,6 +8,10 @@ export interface AllDataStructure {
   answerOptions: questionStructure[];
 }
 
+export interface AllQuestionsData {
+  allQuestionsData: AllDataStructure[];
+}
+
 export type dataAction = {
   type: string;
   payload: AllDataStructure[];

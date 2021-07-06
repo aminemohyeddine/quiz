@@ -1,0 +1,140 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+/* questionsPage */
+
+.questionContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: cyan;
+}
+.answersButton {
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 260px;
+  height: 30px;
+  border: rgb(150, 150, 255) 2px solid;
+  border-radius: 20px;
+  background-color: transparent;
+}
+.answersButtonRight {
+  color: black;
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 260px;
+  height: 30px;
+  border: rgb(150, 150, 255) 2px solid;
+  border-radius: 20px;
+  background-color: rgb(0, 255, 0);
+}
+
+.answersButtonWrong {
+  color: black;
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 260px;
+  height: 30px;
+  border: rgb(150, 150, 255) 2px solid;
+  border-radius: 20px;
+  background-color: rgb(255, 0, 0);
+}
+.question-count {
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+.questions {
+  border-radius: 20px;
+
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 40vh;
+  width: 80%;
+  background-color: rgb(0, 0, 85);
+}
+
+.answer-section {
+  display: flex;
+  flex-direction: column;
+}
+.answersButton:hover {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
+.question-section {
+  margin-right: 100px;
+  height: 200px;
+  width: 200px;
+}
+
+/* scorepage */
+
+.scorePage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: cyan;
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+  width: 60%;
+  background-color: rgb(0, 0, 85);
+}
+
+.scoreText {
+  color: rgb(255, 4, 4);
+}
+
+/* mediaQuery */
+
+@media (max-width: 783px) {
+  .answersButton {
+    width: 200px;
+    height: 30px;
+  }
+  .question-count {
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+  }
+  .question-text {
+    font-size: 1rem;
+  }
+  .question-section {
+    margin-right: 50px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 559px) {
+  .questions {
+    flex-direction: column;
+    height: 80vh;
+    width: 80%;
+  }
+  .answersButton {
+    width: 240px;
+    height: 40px;
+  }
+  .question-count {
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+  }
+  .question-text {
+    font-size: 1rem;
+  }
+  .question-section {
+    margin-right: 50px;
+    height: 150px;
+  }
+}

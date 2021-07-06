@@ -1,0 +1,62 @@
+* {
+  margin: 0px;
+}
+.signUp {
+  background-color: rgb(161, 161, 161);
+}
+.singUpLastNameInput,
+.singUpPasswordInput,
+.singUpEmailInput,
+.singUpFirstNameInput,
+.lastNameUserNameInput,
+.phoneInput {
+  border: white 1px solid;
+  border-radius: 5px;
+  margin-top: 10px;
+  width: 373px;
+  height: 40px;
+  font-size: 0.9rem;
+  color: black;
+}
+.phoneErrorM,
+.emailEmailErrorM,
+.singUpPasswordErrorM,
+.lastNameUserNameErrorM,
+.lastNameErrorM,
+.firstNameErrorM {
+  margin-top: 2px;
+  color: red;
+  font-size: 1rem;
+}
+.signUpLoginButton {
+  background-color: rgb(0, 199, 0);
+  border: solid 1px rgb(0, 199, 0);
+  border-radius: 4px;
+  margin-top: 8px;
+  width: 160px;
+  padding: 0px;
+  font-size: 1rem;
+  height: 40px;
+  margin-left: 214px;
+}
+
+.signUpLoginButton:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.singUpFormContainer {
+  margin: 30px;
+  margin-top: 0px;
+  margin-left: 350px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 500px;
+  flex-grow: 1;
+}
+
+.reasonMessage {
+  flex-grow: 1;
+}
