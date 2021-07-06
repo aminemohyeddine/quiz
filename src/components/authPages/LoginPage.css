@@ -1,113 +1,48 @@
 * {
-  color: black;
+  margin: 0;
+  padding: 0;
 }
-.itemsContainer {
-  width: 430px;
-  height: 65vh;
+.LoginPageContainer {
+  display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
-  flex-direction: column;
-  font-size: 30px;
-  text-align: center;
+  background-image: url("../../images/daniele-franchi-CBajXlpgIyA-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 100vh;
+  width: 100%;
 }
 .formContainer {
-  background-color: rgb(255, 255, 255);
-  height: 75vh;
-  width: 430px;
+  color: white;
+  background-color: rgb(0, 0, 0);
+  height: 60vh;
+  width: 25%;
 }
-.passwordErrorMessage {
-  position: relative;
-  right: 76px;
-  font-size: 1rem;
-  color: red;
+.itemsContainer {
+  height: 60vh;
+  color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.signUpPage {
-  width: 290px;
-  margin-bottom: 30px;
-  margin-top: 10px;
+.fa-user {
+  font-size: 40px;
 }
-.itemsContainer > h1 {
-  margin-bottom: 30px;
-  font-style: italic;
-}
-
-.LoginPageContainer {
-  background-color: rgb(255, 255, 255);
-  height: 88vh;
-}
-
-.LoginPageContainer {
+.loginIcon {
+  top: 95px;
+  position: absolute;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 75px;
+  width: 75px;
+  background-color: rgb(255, 50, 50);
 }
-
-.errorDiv {
-  width: 350px;
-  background-color: rgb(255, 183, 101);
-  margin-bottom: 10px;
-}
-.passwordLabel {
-  margin-top: 10px;
-}
-.itemsContainer > label {
-  font-style: italic;
-  font-size: 1.1rem;
-  position: relative;
-  left: -149px;
-  margin-bottom: 2px;
-}
-input:focus {
-  outline: none;
-  border: 1px solid rgb(0, 247, 255);
-}
-
-.userNameInput {
-  border-radius: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  outline: none;
-  border: 1px solid rgb(219, 219, 219);
-  width: 290px;
-  height: 40px;
-  font-size: 0.9rem;
-}
-.usernameErrorMessage {
-  position: relative;
-  right: 76px;
-  font-size: 1rem;
-  color: red;
+.loginText {
+  font-size: 1.5rem;
+  font-family: "Courier New", Courier, monospace;
 }
 .loginFailedMessage {
-  font-style: italic;
-  border-radius: 10px;
-  margin-top: 10px;
-  font-size: 1.1rem;
-  background-color: rgb(240, 125, 125);
-  width: 290px;
-}
-
-.PasswordInput {
-  border-radius: 10px;
-  margin-top: 10px;
-  width: 290px;
-  height: 40px;
-  font-size: 0.9rem;
-  outline: none;
-  border: 1px solid rgb(219, 219, 219);
-}
-.loginButton {
-  border: none;
-  cursor: pointer;
-  background-color: orangered;
-  margin-top: 10px;
-  width: 290px;
-  height: 40px;
-  font-size: 1rem;
-  border-radius: 30px;
-}
-
-.loginButton:focus {
-  outline: none;
+  margin-top: 70px;
 }
