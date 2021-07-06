@@ -17,7 +17,7 @@ export const LoginPage = () => {
     if (user.data.login) {
       console.log(user.data);
       localStorage.setItem("headerToken", JSON.stringify(user.data.token));
-      history.push("/game");
+      history.push("/posts");
     } else {
       console.log(user.data);
       setMessage(user.data);
@@ -54,12 +54,13 @@ export const LoginPage = () => {
               <div className="formContainer">
                 <div className="itemsContainer">
                   <div className="loginFailedMessage">{message}</div>
-                  <h1>Log in shoooo Ishop</h1>
-                  {errors.userName && touched.userName ? (
-                    <div className="usernameErrorMessage">
-                      <ErrorMessage name="userName" />
-                    </div>
-                  ) : null}
+                  <div className="loginIcon">
+                    <i className="far fa-user"></i>
+                  </div>
+
+                  <div className="loginText">Login here</div>
+                  <label>email</label>
+
                   <Field
                     placeholder="username"
                     className="userNameInput"
@@ -67,11 +68,7 @@ export const LoginPage = () => {
                     type="text"
                     autoComplete="off"
                   />
-                  {errors.password && touched.password ? (
-                    <div className="passwordErrorMessage">
-                      <ErrorMessage name="password" />
-                    </div>
-                  ) : null}
+                  <label>password</label>
 
                   <Field
                     placeholder="password"
@@ -80,7 +77,7 @@ export const LoginPage = () => {
                     type="password"
                   />
                   <button className="loginButton" type="submit">
-                    Log in
+                    Login
                   </button>
                   <div className="signUpPage">
                     you don't have an account ?{" "}
