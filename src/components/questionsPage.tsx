@@ -14,8 +14,7 @@ interface Props {}
 
 export const QuestionsPage: React.FC<Props> = () => {
   //states
-  const [showRightAnswer, setShowRightAnswer] = useState(false);
-  const [isRight, setIsRight] = useState<boolean>(false);
+  const [answerIsShown, setAnswerIsShown] = useState<boolean>(false);
   const [wrongAnswer, setWrongAnswer] = useState<string>("");
   const [rightAnswer, setRightAnswer] = useState<string>("");
   const [totalTime, setTotalTime] = useState<number>(0);
@@ -25,23 +24,17 @@ export const QuestionsPage: React.FC<Props> = () => {
   const [showScore, setShowScore] = useState<boolean>(false);
   const [buttonClassName, setButtonClassName] = useState<string>("");
 
-  const timeCompleted = () => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      setCurrentQuestion(0);
-      setShowScore(true);
-    }
+  const hideRightAnswer = () => {
+    setTimeout(() => {
+      setAnswerIsShown(false);
+      console.log(answerIsShown + "false");
+    }, 6000);
   };
 
-  const answerHandler = (isCorrect: boolean) => {
-    return (event: React.MouseEvent) => {
-      if (isCorrect) {
-        setScore(score + 1);
-        setIsRight(true);
-      } else {
-        setIsRight(false);
-      }
+  const timeCompleted = () => {
+    setAnswerIsShown(true);
+    hideRightAnswer();
+    setTimeout(() => {
       if (currentQuestion < questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
       } else {
@@ -49,6 +42,24 @@ export const QuestionsPage: React.FC<Props> = () => {
         setShowScore(true);
       }
       setSeconds(30);
+    }, 6000);
+  };
+
+  const answerHandler = (isCorrect: boolean) => {
+    return (event: React.MouseEvent) => {
+      isCorrect ? setScore(score + 1) : console.log();
+      setAnswerIsShown(true);
+      hideRightAnswer();
+
+      setTimeout(() => {
+        if (currentQuestion < questions.length - 1)
+          setCurrentQuestion(currentQuestion + 1);
+        else {
+          setCurrentQuestion(0);
+          setShowScore(true);
+        }
+        setSeconds(30);
+      }, 6000);
     };
   };
 
@@ -69,6 +80,7 @@ export const QuestionsPage: React.FC<Props> = () => {
     return () => window.clearTimeout(timeoutID);
   }, [currentQuestion]);
 
+  //time total
   useEffect(() => {
     const timeoutID = window.setTimeout(() => {
       setTotalTime(totalTime + 1);
@@ -76,13 +88,7 @@ export const QuestionsPage: React.FC<Props> = () => {
     return () => window.clearTimeout(timeoutID);
   }, [totalTime]);
 
-  //isRightHandler useEffect
-  useEffect(() => {
-    const timeoutID = window.setTimeout(() => {
-      setShowRightAnswer(true);
-    }, 5000);
-    return () => window.clearTimeout(timeoutID);
-  }, [showRightAnswer]);
+  //function to show right AnswersButton
 
   return (
     <div>
@@ -107,14 +113,26 @@ export const QuestionsPage: React.FC<Props> = () => {
                 </h4>
               </div>
               <div className="answer-section">
-                {questions[currentQuestion].answerOptions.map((answer) => (
-                  <button
-                    className="answersButton"
-                    onClick={answerHandler(answer.isCorrect)}
-                  >
-                    {answer.answerText}
-                  </button>
-                ))}
+                {questions[currentQuestion].answerOptions.map((answer) =>
+                  answerIsShown ? (
+                    answer.isCorrect ? (
+                      <button className="answersButtonRight">
+                        {answer.answerText}
+                      </button>
+                    ) : (
+                      <button className="answersButtonWrong">
+                        {answer.answerText}
+                      </button>
+                    )
+                  ) : (
+                    <button
+                      className="answersButton"
+                      onClick={answerHandler(answer.isCorrect)}
+                    >
+                      {answer.answerText}
+                    </button>
+                  )
+                )}
               </div>
             </div>
           </div>

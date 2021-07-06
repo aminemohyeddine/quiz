@@ -1,0 +1,113 @@
+* {
+  color: black;
+}
+.itemsContainer {
+  width: 430px;
+  height: 65vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 30px;
+  text-align: center;
+}
+.formContainer {
+  background-color: rgb(255, 255, 255);
+  height: 75vh;
+  width: 430px;
+}
+.passwordErrorMessage {
+  position: relative;
+  right: 76px;
+  font-size: 1rem;
+  color: red;
+}
+.signUpPage {
+  width: 290px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+.itemsContainer > h1 {
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+.LoginPageContainer {
+  background-color: rgb(255, 255, 255);
+  height: 88vh;
+}
+
+.LoginPageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorDiv {
+  width: 350px;
+  background-color: rgb(255, 183, 101);
+  margin-bottom: 10px;
+}
+.passwordLabel {
+  margin-top: 10px;
+}
+.itemsContainer > label {
+  font-style: italic;
+  font-size: 1.1rem;
+  position: relative;
+  left: -149px;
+  margin-bottom: 2px;
+}
+input:focus {
+  outline: none;
+  border: 1px solid rgb(0, 247, 255);
+}
+
+.userNameInput {
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  outline: none;
+  border: 1px solid rgb(219, 219, 219);
+  width: 290px;
+  height: 40px;
+  font-size: 0.9rem;
+}
+.usernameErrorMessage {
+  position: relative;
+  right: 76px;
+  font-size: 1rem;
+  color: red;
+}
+.loginFailedMessage {
+  font-style: italic;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  background-color: rgb(240, 125, 125);
+  width: 290px;
+}
+
+.PasswordInput {
+  border-radius: 10px;
+  margin-top: 10px;
+  width: 290px;
+  height: 40px;
+  font-size: 0.9rem;
+  outline: none;
+  border: 1px solid rgb(219, 219, 219);
+}
+.loginButton {
+  border: none;
+  cursor: pointer;
+  background-color: orangered;
+  margin-top: 10px;
+  width: 290px;
+  height: 40px;
+  font-size: 1rem;
+  border-radius: 30px;
+}
+
+.loginButton:focus {
+  outline: none;
+}
