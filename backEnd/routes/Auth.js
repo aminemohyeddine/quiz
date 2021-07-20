@@ -3,6 +3,7 @@ const User = require("../model/User");
 const { registerValidation, loginValidation } = require("../validation");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const verify = require("./verifyToken");
 require("dotenv").config();
 
 router.post("/register", async (req, res) => {
@@ -56,7 +57,7 @@ router.post("/login", async (req, res) => {
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
     expiresIn: "50min",
   });
-  finalData = { token: token, login: true };
+  finalData = { token: token, login: true, currentUser: user };
   res.header("auth-token", token).send(finalData);
 });
 

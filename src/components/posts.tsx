@@ -3,15 +3,15 @@ import axios from "axios";
 
 export const Posts: React.FC = () => {
   const JWT_TOKEN: string | null = JSON.parse(
-    localStorage.getItem("headerToken") || "{}"
+    localStorage.getItem("userToken") || "{}"
   );
 
   const checkToken = async () => {
     const data = await axios.post("http://localhost:3001/posts", {
       token: JWT_TOKEN,
     });
-    console.log(data);
   };
+
   useEffect(() => {
     checkToken();
   }, []);
