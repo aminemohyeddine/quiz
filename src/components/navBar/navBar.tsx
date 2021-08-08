@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./navBar.css";
+
 interface Props {
   isMobile: boolean;
   isEditedClass: boolean;
@@ -24,11 +25,10 @@ export const NavBar: React.FC<Props> = ({
     const data = await axios.post("http://localhost:3001/posts", {
       token: JWT_TOKEN,
     });
-    console.log(data);
     setIsUser(true);
     setName(data.data.userName);
-    console.log(name);
   };
+
   useEffect(() => {
     getUserData();
   }, []);
@@ -37,7 +37,7 @@ export const NavBar: React.FC<Props> = ({
     <>
       {isMobile ? (
         <div className="navBar">
-          <div className="logo">Fill Your Mind</div>
+          <div className="logo">Fill Your Mind </div>
 
           <div className="navBarInfosMobile">
             <div
@@ -72,7 +72,19 @@ export const NavBar: React.FC<Props> = ({
             <Link className="about" to="/about">
               <p>About</p>
             </Link>
-            {isUser ? <div>{name}</div> : null}
+            {isUser ? (
+              <div className="userInfoContainer">
+                <div className="navInfo userInfo">
+                  <p>{name}&nbsp;&nbsp;&nbsp; </p>
+                  <i className="fas fa-long-arrow-alt-down arrow"></i>
+                </div>
+                <div className="userBellowDiv">
+                  <div className="profile">profile</div>
+                  <div className="changePassword">change password</div>
+                  <div className="changePassword">logout</div>
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
       )}

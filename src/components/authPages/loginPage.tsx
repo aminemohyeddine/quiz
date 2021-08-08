@@ -16,7 +16,7 @@ export const LoginPage = () => {
 
     if (user.data.login) {
       localStorage.setItem("userToken", JSON.stringify(user.data.token));
-      history.push("/posts");
+      history.push("/profile");
     } else {
       console.log(user.data);
       setMessage(user.data);
@@ -32,7 +32,7 @@ export const LoginPage = () => {
             .max(60, "* email Must be 15 characters or less")
             .min(6, "*email Must be 6 characters or more")
             .required("*email is Required")
-            .email("must be an email"),
+            .email("*must be an email"),
           password: Yup.string()
             .max(20, "*password Must be 20 characters or less")
             .min(6, "*password Must be 6 characters or more")

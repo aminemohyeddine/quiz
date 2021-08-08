@@ -39,6 +39,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
+//login router
 router.post("/login", async (req, res) => {
   //validate data with joi
   const { error } = loginValidation(req.body);

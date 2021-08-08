@@ -2,6 +2,23 @@
   margin: 0;
   padding: 0;
 }
+
+.navInfo:hover ~ .userBellowDiv {
+  opacity: 1;
+}
+
+.userBellowDiv {
+  opacity: 0;
+  position: absolute;
+  background-color: white;
+  color: black;
+  top: 10vh;
+  width: 148px;
+}
+
+.arrow {
+  color: white;
+}
 .navBar {
   color: white;
   height: 10vh;
