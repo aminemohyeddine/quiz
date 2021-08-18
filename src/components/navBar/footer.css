@@ -8,13 +8,14 @@
   justify-content: center;
 }
 .footerElement {
+  width: 83%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: space-between;
+  justify-content: space-between;
 }
+
 .contactUs,
 .terms {
-  margin-left: 100px;
 }
 a,
 a:hover {
@@ -50,4 +51,15 @@ a:hover {
 }
 .element:hover {
   border: 1px solid white;
+}
+@media (max-width: 600px) {
+  .element {
+    font-size: 0.7rem;
+  }
+  .copyright {
+    font-size: 0.8rem;
+  }
+  .facebook {
+    margin-left: 50px;
+  }
 }

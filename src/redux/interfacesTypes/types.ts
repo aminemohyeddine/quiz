@@ -3,6 +3,15 @@ export interface questionStructure {
   isCorrect: boolean;
 }
 
+export interface userInformation {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  userName: string;
+  phoneNumber: string;
+}
+
 export interface AllDataStructure {
   questionText: string;
   answerOptions: questionStructure[];

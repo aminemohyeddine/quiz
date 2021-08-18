@@ -2,6 +2,35 @@
   margin: 0;
   padding: 0;
 }
+
+.userBellowDiv {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  height: 150px;
+  left: 86%;
+  position: absolute;
+  background-color: white;
+  color: black;
+  top: 10vh;
+  width: 148px;
+}
+.userBellowDiv {
+  background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);
+}
+
+.bellowItem {
+  display: block;
+  padding-bottom: 10px;
+}
+
+.bellowItem:hover {
+  color: white;
+}
+
+.arrow {
+  color: white;
+}
 .navBar {
   color: white;
   height: 10vh;

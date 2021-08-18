@@ -1,0 +1,86 @@
+.devQuestionsContainer {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);
+}
+.devFormContainer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.DevErrorDiv {
+  color: red;
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.devQuestionInput {
+  padding: 3px;
+  padding-left: 8px;
+  height: 20px;
+  width: 82%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  border: 1px solid rgb(195, 195, 195);
+}
+
+.questionInput {
+  padding: 3px;
+  height: 20px;
+  width: 82%;
+  border-radius: 20px;
+  border: 1px solid rgb(195, 195, 195);
+  padding-left: 8px;
+}
+
+.DevErrorDiv {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.devForms {
+  margin-top: 30px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.questionOnePlusIsCorrect,
+.questionTwoPlusIsCorrect,
+.questionThreePlusIsCorrect,
+.questionFourPlusIsCorrect {
+  display: flex;
+  justify-content: center;
+}
+
+.questionInput {
+  width: 70%;
+  margin-right: 10px;
+}
+
+.addQuestionButton {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 20px;
+  border: none;
+  border: 1px solid black;
+  background-color: black;
+  color: white;
+}
+
+.addQuestionButton:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}

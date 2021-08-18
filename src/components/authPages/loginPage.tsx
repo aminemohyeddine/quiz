@@ -5,10 +5,39 @@ import "./LoginPage.css";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 
-export const LoginPage = () => {
+interface Props {
+  isAuthenticated: boolean;
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<any>>;
+  adminIsAuthenticated: boolean;
+  name: string;
+  setAdminIsAuthenticated: React.Dispatch<React.SetStateAction<any>>;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const LoginPage: React.FC<Props> = ({
+  isAuthenticated,
+  setIsAuthenticated,
+  adminIsAuthenticated,
+  setAdminIsAuthenticated,
+  setName,
+  name,
+}) => {
   const history = useHistory();
   const [message, setMessage] = useState("");
-  const fetchProducts = async (email: string, password: string) => {
+  const checkIfUserOrAdminIsAuth = () => {
+    if (isAuthenticated) {
+      history.push("/profile");
+    } else if (adminIsAuthenticated) {
+      history.push("/categoriespage");
+    } else {
+      return null;
+    }
+    console.log();
+  };
+  useEffect(() => {
+    checkIfUserOrAdminIsAuth();
+  }, []);
+  const authentificationHandler = async (email: string, password: string) => {
     const user = await axios.post("http://localhost:3001/user/login", {
       email: email,
       password: password,
@@ -16,9 +45,27 @@ export const LoginPage = () => {
 
     if (user.data.login) {
       localStorage.setItem("userToken", JSON.stringify(user.data.token));
-      history.push("/posts");
+      setIsAuthenticated(true);
+      localStorage.setItem("isAuthenticated", "true");
+      setName(user.data.firstName);
+      console.log(localStorage.getItem("isAuthenticated"));
+      history.push("/profile");
+    } else if (!user.data.login) {
+      const user: any = await axios.post("http://localhost:3001/admin/login", {
+        email: email,
+        password: password,
+      });
+      if (user.data.login) {
+        localStorage.setItem("userToken", JSON.stringify(user.data.token));
+        setAdminIsAuthenticated(true);
+        localStorage.setItem("adminAuth", "true");
+        localStorage.setItem("name", user.data.currentUser.firstName);
+        console.log(localStorage.getItem("adminAuth"));
+        history.push("/categoriespage");
+      } else {
+        setMessage(user.data);
+      }
     } else {
-      console.log(user.data);
       setMessage(user.data);
     }
   };
@@ -32,14 +79,14 @@ export const LoginPage = () => {
             .max(60, "* email Must be 15 characters or less")
             .min(6, "*email Must be 6 characters or more")
             .required("*email is Required")
-            .email("must be an email"),
+            .email("*must be an email"),
           password: Yup.string()
             .max(20, "*password Must be 20 characters or less")
             .min(6, "*password Must be 6 characters or more")
             .required("*password is Required"),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          fetchProducts(values.email, values.password);
+          authentificationHandler(values.email, values.password);
 
           // console.log(
           //   JSON.stringify(values.email) +

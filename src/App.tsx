@@ -1,25 +1,93 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import { questions } from "./components/data";
-import { QuestionsPage } from "./components/questionsPage";
+import axios from "axios";
+import { QuestionsPage } from "./components/gamePages/questionsPage";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { HomePage } from "./components/homePage";
+import { HomePage } from "./components/gamePages/homePage";
 import { SignUp } from "./components/authPages/Register";
 import { ResetPasswordPage } from "./components/authPages/resetPasswordPage";
 import { LoginPage } from "./components/authPages/loginPage";
-import { Posts } from "./components/posts";
+import { Posts } from "./components/gamePages/posts";
 import { NavBar } from "./components/navBar/navBar";
 import { GreyPage } from "./components/navBar/greyPage";
 import { LeftBar } from "./components/navBar/leftBar";
 import { Footer } from "./components/navBar/footer";
+import { ProfilePage } from "./components/gamePages/profilePage";
+import { CategoriesPage } from "./components/gamePages/CategoriesPage";
+import { AddQuestion } from "./components/devPages/addQuestion";
+import { ChangePassword } from "./components/authPages/changePassword";
 
 function App() {
-  const [isEditedClass, setIsEditedClass] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [name, setName] = useState<string>("");
+  const [stillAuthorized, setStillAuthorized] = useState<boolean>(false);
 
-  useEffect(() => {
-    updateDimensions();
-  });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [isEditedClass, setIsEditedClass] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  //navbar
+  const [showUserInfo, setShowUserInfo] = useState<boolean>(false);
+  const setUserInfoToFalse = () => {
+    setShowUserInfo(false);
+  };
+
+  const JWT_TOKEN: string | null = JSON.parse(
+    localStorage.getItem("userToken") || "{}"
+  );
+  const localStorageIsAuthenticated: string | null = JSON.parse(
+    localStorage.getItem("isAuthenticated") || "{}"
+  );
+  const storageName: string | null = localStorage.getItem("name") || "{}";
+
+  const localStorageAdminIsAuthenticated: string | null = JSON.parse(
+    localStorage.getItem("adminAuth") || "{}"
+  );
+
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [adminIsAuthenticated, setAdminIsAuthenticated] =
+    useState<boolean>(false);
+
+  const getAdminData = async () => {
+    const admin = await axios.post("http://localhost:3001/posts/admin", {
+      token: JWT_TOKEN,
+    });
+    if (admin.data == "String") {
+      setAdminIsAuthenticated(false);
+      localStorage.setItem("adminAuth", "false");
+    } else if (typeof admin.data === "object") {
+      setAdminIsAuthenticated(true);
+      localStorage.setItem("adminAuth", "true");
+    }
+  };
+  const getUserData = async () => {
+    const data = await axios.post("http://localhost:3001/posts", {
+      token: JWT_TOKEN,
+    });
+
+    if (data.data == "String") {
+      setIsAuthenticated(false);
+      localStorage.setItem("isAuthenticated", "false");
+      getAdminData();
+    } else if (typeof data.data === "object") {
+      setIsAuthenticated(true);
+      localStorage.setItem("isAuthenticated", "true");
+    } else {
+      return null;
+    }
+  };
+
+  const logOutHandler = () => {
+    localStorage.setItem("userToken", "");
+    setIsAuthenticated(false);
+    setAdminIsAuthenticated(false);
+    localStorage.setItem("isAuthenticated", "false");
+    localStorage.setItem("adminAuth", "false");
+  };
+
+  const getAuthFromLocalS = () => {
+    const value = JSON.parse(localStorage.getItem("isAuthenticated") || "{}");
+    setIsAuthenticated(value);
+  };
 
   const updateDimensions = () => {
     if (window.innerWidth < 600) {
@@ -30,14 +98,54 @@ function App() {
     }
   };
   window.addEventListener("resize", updateDimensions);
+
+  const checkTheToken = async () => {
+    try {
+      const tokenResponse = await axios.post("http://localhost:3001/posts", {
+        token: JWT_TOKEN,
+      });
+    } catch (e) {
+      console.log("error");
+      setIsAuthenticated(false);
+      setAdminIsAuthenticated(false);
+      localStorage.setItem("adminAuth", "false");
+      localStorage.setItem("isAuthenticated", "false");
+    }
+  };
+
+  useEffect(() => {
+    getAuthFromLocalS();
+    getUserData();
+    console.log(stillAuthorized);
+  }, []);
+
+  useEffect(() => {
+    setInterval(() => {
+      checkTheToken();
+    }, 600000);
+  }, []);
+  useEffect(() => {
+    updateDimensions();
+  });
+
   return (
     <>
       <Router>
         <NavBar
+          showUserInfo={showUserInfo}
+          setShowUserInfo={setShowUserInfo}
+          name={name}
+          getUserData={() => getUserData()}
+          logOutHandler={logOutHandler}
+          isLoading={isLoading}
+          isAuthenticated={isAuthenticated}
+          setIsAuthenticated={setIsAuthenticated}
           isMobile={isMobile}
           setIsMobile={setIsMobile}
           isEditedClass={isEditedClass}
           setIsEditedClass={setIsEditedClass}
+          adminIsAuthenticated={adminIsAuthenticated}
+          setAdminIsAuthenticated={setAdminIsAuthenticated}
         />
         <GreyPage
           isEditedClass={isEditedClass}
@@ -52,21 +160,53 @@ function App() {
           <Route exact path="/">
             <HomePage />
           </Route>
-          {/* LoginPage */}
+          {/* Login and register Pages change password /changepassword */}
           <Route exact path="/register">
             <SignUp />
           </Route>
-          <Route exact path="/login">
-            <LoginPage />
+          <Route exact path="/changepassword">
+            <ChangePassword
+              setUserInfoToFalse={() => {
+                setUserInfoToFalse();
+              }}
+            />
           </Route>
-          <Route exact path="/game">
-            <QuestionsPage />
+          <Route exact path="/login">
+            <LoginPage
+              name={name}
+              setName={setName}
+              adminIsAuthenticated={adminIsAuthenticated}
+              setAdminIsAuthenticated={setAdminIsAuthenticated}
+              isAuthenticated={isAuthenticated}
+              setIsAuthenticated={setIsAuthenticated}
+            />
+          </Route>
+          {/* game and profile Pages */}
+          <Route exact path="/game/:questionsfield">
+            <QuestionsPage isAuthenticated={isAuthenticated} />
+          </Route>
+          <Route exact path="/profile">
+            <ProfilePage
+              setIsAuthenticated={setIsAuthenticated}
+              isAuthenticated={isAuthenticated}
+            />
           </Route>
           <Route exact path="/posts">
             <Posts />
           </Route>
           <Route exact path="/reset">
             <ResetPasswordPage />
+          </Route>
+          <Route exact path="/categoriespage">
+            <CategoriesPage setUserInfoToFalse={setUserInfoToFalse} />
+          </Route>
+          {/* dev routes */}
+          <Route exact path="/dev/addQuestion/:questionsfield">
+            <AddQuestion
+              setUserInfoToFalse={setUserInfoToFalse}
+              adminIsAuthenticated={adminIsAuthenticated}
+              setAdminIsAuthenticated={setAdminIsAuthenticated}
+            />
           </Route>
         </Switch>
         <Footer />
