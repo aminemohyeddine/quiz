@@ -14,18 +14,21 @@
 
   text-align: center;
 }
-
+.dataItem {
+  padding-bottom: 10px;
+}
 .dataContainer {
-  border: 1px solid black;
   padding: 10px;
   margin-bottom: 40px;
 }
 
 .buttonsContainer {
   display: flex;
+  border-bottom: 1px black solid;
 }
 
 .categoriesButton {
+  border-right: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;

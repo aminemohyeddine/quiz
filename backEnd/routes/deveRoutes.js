@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const verify = require("./verifyToken");
 require("dotenv").config();
 
+//normal users routes...
 //remove all users
 router.post("/delete/all", async (req, res) => {
   await User.remove({});

@@ -12,13 +12,13 @@ const questionSchema = new mongoose.Schema({
       answerText: {
         type: String,
         required: true,
-        min: 6,
+        min: 1,
         max: 255,
       },
       isCorrect: {
         type: Boolean,
         required: true,
-        min: 6,
+        min: 1,
         max: 255,
       },
     },

@@ -1,7 +1,13 @@
 {
-    "cSpell.ignoreWords": [
-        "formik",
-        "mohyeddine",
-        "signup"
-    ]
+  "cSpell.ignoreWords": [
+    "addquestion",
+    "authentification",
+    "categorie",
+    "categoriespage",
+    "changepassword",
+    "formik",
+    "handler",
+    "mohyeddine",
+    "signup"
+  ]
 }

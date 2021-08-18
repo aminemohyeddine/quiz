@@ -6,10 +6,14 @@ import "./questionsPage.css";
 import { AllDataStructure } from "../../redux/interfacesTypes/types";
 import { getAllData } from "../../redux/actions/quizDataAction";
 import axios from "axios";
+import { MustLogin } from "../authPages/mustLogin";
+import { Loading } from "./Loading";
 
-interface Props {}
+interface Props {
+  isAuthenticated: boolean;
+}
 
-export const QuestionsPage: React.FC<Props> = () => {
+export const QuestionsPage: React.FC<Props> = ({ isAuthenticated }) => {
   //states
   const [answerIsShown, setAnswerIsShown] = useState<boolean>(false);
   const [totalTime, setTotalTime] = useState<number>(0);
@@ -181,68 +185,76 @@ export const QuestionsPage: React.FC<Props> = () => {
 
   return (
     <div>
-      {loading ? (
-        <div>loading ...</div>
-      ) : (
-        <div>
-          {data === undefined || data.length === 0 ? (
+      {isAuthenticated ? (
+        <>
+          {loading ? (
             <div>loading ...</div>
           ) : (
             <div>
-              {showScore ? (
-                <div className="scorePage">
-                  <div className="score">
-                    <div className="scoreText">
-                      you got {score - 1} points out of {data.length}
-                    </div>
-                  </div>
-                </div>
+              {data === undefined || data.length === 0 ? (
+                <Loading />
               ) : (
-                <>
-                  <div className="questionContainer">
-                    <div className="questions">
-                      <div className="question-section">
-                        <div className="question-count">
-                          <div className="questionNumberText">
-                            Question {currentQuestion + 1}
+                <div>
+                  {showScore ? (
+                    <div className="scorePage">
+                      <div className="score">
+                        <div className="scoreText">
+                          you got {score - 1} points out of {data.length}
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="questionContainer">
+                        <div className="questions">
+                          <div className="question-section">
+                            <div className="question-count">
+                              <div className="questionNumberText">
+                                Question {currentQuestion + 1}
+                              </div>
+                            </div>
+                            <h4 className="question-text">
+                              00:{seconds}
+                              <br></br>
+                              {data[currentQuestion].questionText}
+                            </h4>
+                          </div>
+                          <div className="answer-section">
+                            {data[currentQuestion].answerOptions.map(
+                              (answer, key) =>
+                                answerIsShown ? (
+                                  answer.isCorrect ? (
+                                    <button className="answersButtonRight">
+                                      {answer.answerText}
+                                    </button>
+                                  ) : (
+                                    <button className="answersButtonWrong">
+                                      {answer.answerText}
+                                    </button>
+                                  )
+                                ) : (
+                                  <button
+                                    className="answersButton"
+                                    onClick={answerHandler(answer.isCorrect)}
+                                  >
+                                    {answer.answerText}
+                                  </button>
+                                )
+                            )}
                           </div>
                         </div>
-                        <h4 className="question-text">
-                          00:{seconds}
-                          <br></br>
-                          {data[currentQuestion].questionText}
-                        </h4>
                       </div>
-                      <div className="answer-section">
-                        {data[currentQuestion].answerOptions.map(
-                          (answer, key) =>
-                            answerIsShown ? (
-                              answer.isCorrect ? (
-                                <button className="answersButtonRight">
-                                  {answer.answerText}
-                                </button>
-                              ) : (
-                                <button className="answersButtonWrong">
-                                  {answer.answerText}
-                                </button>
-                              )
-                            ) : (
-                              <button
-                                className="answersButton"
-                                onClick={answerHandler(answer.isCorrect)}
-                              >
-                                {answer.answerText}
-                              </button>
-                            )
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </>
+                    </>
+                  )}
+                </div>
               )}
             </div>
           )}
-        </div>
+        </>
+      ) : (
+        <>
+          <MustLogin />
+        </>
       )}
     </div>
   );

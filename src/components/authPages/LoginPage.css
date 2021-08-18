@@ -62,6 +62,7 @@ label {
   font-family: "Courier New", Courier, monospace;
 }
 .loginFailedMessage {
+  color: black;
   margin-top: 70px;
 }
 ::placeholder {
@@ -126,8 +127,12 @@ input:focus {
   left: -59px;
 }
 @media (max-width: 400px) {
+  .itemsContainer {
+    height: 50vh;
+  }
   .formContainer {
-    height: 60vh;
+    margin-top: 00px;
+    height: 48vh;
     width: 200px;
   }
   .loginText {
@@ -151,7 +156,9 @@ input:focus {
     left: -60px;
   }
   .loginButton {
-    margin-bottom: 10px;
+    margin-top: 10px;
+
+    margin-bottom: 25px;
     font-size: 0.8rem;
     width: 180px;
     height: 30px;
@@ -169,7 +176,7 @@ input:focus {
     left: -30px;
   }
   .loginIcon {
-    top: 120px;
+    top: 30vh;
     position: absolute;
     border-radius: 50%;
     display: flex;

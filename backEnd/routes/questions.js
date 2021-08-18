@@ -16,7 +16,7 @@ require("dotenv").config();
 router.post("/question/add/javascript", async (req, res) => {
   const question = new JavaScriptQuestions({
     questionText: req.body.questionText,
-    answerOption: req.body.answerOption,
+    answerOptions: req.body.answerOption,
   });
 
   const questionAlready = await JavaScriptQuestions.findOne({
@@ -30,7 +30,7 @@ router.post("/question/add/javascript", async (req, res) => {
     let registerData = { message: "user added", savedQuestion: savedQuestion };
     res.send(registerData);
   } catch (err) {
-    res.send(err + "in add ");
+    res.send(err);
     console.log(err);
   }
 });
@@ -42,7 +42,7 @@ router.get("/question/get/javascript", async (req, res) => {
 router.post("/question/add/python", async (req, res) => {
   const question = new PythonQuestions({
     questionText: req.body.questionText,
-    answerOption: req.body.answerOption,
+    answerOptions: req.body.answerOption,
   });
   const questionAlready = await JavaScriptQuestions.findOne({
     questionText: req.body.questionText,
@@ -68,7 +68,7 @@ router.get("/question/get/python", async (req, res) => {
 router.post("/question/add/religion", async (req, res) => {
   const question = new ReligionQuestions({
     questionText: req.body.questionText,
-    answerOption: req.body.answerOption,
+    answerOptions: req.body.answerOption,
   });
   const questionAlready = await JavaScriptQuestions.findOne({
     questionText: req.body.questionText,
@@ -89,7 +89,7 @@ router.post("/question/add/religion", async (req, res) => {
 router.post("/question/add/generalculture", async (req, res) => {
   const question = new GeneralCultureQuestions({
     questionText: req.body.questionText,
-    answerOption: req.body.answerOption,
+    answerOptions: req.body.answerOption,
   });
   const questionAlready = await JavaScriptQuestions.findOne({
     questionText: req.body.questionText,
