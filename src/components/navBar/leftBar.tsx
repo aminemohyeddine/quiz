@@ -3,28 +3,27 @@ import "./leftBar.css";
 import { Link } from "react-router-dom";
 
 interface Props {
+  logOutHandler: () => void;
+
+  localStorageIsAuthenticated: boolean | null;
+  localStorageAdminIsAuthenticated: boolean | null;
   isEditedClass: boolean;
   setIsEditedClass: React.Dispatch<React.SetStateAction<any>>;
 }
 export const LeftBar: React.FC<Props> = ({
+  logOutHandler,
+  localStorageIsAuthenticated,
+  localStorageAdminIsAuthenticated,
   isEditedClass,
   setIsEditedClass,
 }) => {
   return (
     <>
-      {isEditedClass ? (
+      {isEditedClass &&
+      !localStorageIsAuthenticated &&
+      !localStorageAdminIsAuthenticated ? (
         <div className="sideBarContainer">
           <div className="sideBarInfos">
-            <Link
-              onClick={() => {
-                setIsEditedClass(false);
-              }}
-              className="sideBar rules"
-              to="/rules"
-            >
-              <p>How to play</p>
-            </Link>
-
             <Link
               onClick={() => {
                 setIsEditedClass(false);
@@ -65,7 +64,65 @@ export const LeftBar: React.FC<Props> = ({
             </Link>
           </div>
         </div>
-      ) : null}{" "}
+      ) : localStorageAdminIsAuthenticated && isEditedClass ? (
+        <div className="sideBarContainer">
+          <div className="sideBarInfos">
+            <Link
+              onClick={() => {
+                setIsEditedClass(false);
+              }}
+              className="sideBar rules"
+              to="/rules"
+            >
+              <p>change password</p>
+            </Link>
+            <Link
+              onClick={() => {
+                logOutHandler();
+                setIsEditedClass(false);
+              }}
+              className="sideBar login"
+              to="/login"
+            >
+              <p>logout</p>
+            </Link>
+          </div>
+        </div>
+      ) : localStorageIsAuthenticated && isEditedClass ? (
+        <div className="sideBarContainer">
+          <div className="sideBarInfos">
+            <Link
+              onClick={() => {
+                setIsEditedClass(false);
+              }}
+              className="sideBar rules"
+              to="/rules"
+            >
+              <p>profile</p>
+            </Link>
+
+            <Link
+              onClick={() => {
+                setIsEditedClass(false);
+              }}
+              className="sideBar login"
+              to="/login"
+            >
+              <p>change password</p>
+            </Link>
+            <Link
+              onClick={() => {
+                setIsEditedClass(false);
+                logOutHandler();
+              }}
+              className="sideBar login"
+              to="/login"
+            >
+              <p>logout</p>
+            </Link>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 };

@@ -11,7 +11,6 @@ interface profilePageProps {
 }
 
 export const ProfilePage: React.FC<profilePageProps> = ({
-  isAuthenticated,
   setIsAuthenticated,
 }) => {
   //getting the current User Data

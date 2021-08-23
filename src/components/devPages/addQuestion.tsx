@@ -3,7 +3,6 @@ import axios from "axios";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./addQuestion.css";
-import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Loading } from "../gamePages/Loading";
 
@@ -14,7 +13,6 @@ interface Props {
 }
 export const AddQuestion: React.FC<Props> = ({
   setUserInfoToFalse,
-  adminIsAuthenticated,
   setAdminIsAuthenticated,
 }) => {
   const JWT_TOKEN: string | null = JSON.parse(
@@ -36,10 +34,8 @@ export const AddQuestion: React.FC<Props> = ({
     }
     setLoading(false);
   };
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(true);
   let { questionsfield }: any = useParams();
-  const [errorMessageFromExpress, setErrorMessageFromExpress] = useState("");
 
   useEffect(() => {
     getAdminData();
@@ -72,11 +68,9 @@ export const AddQuestion: React.FC<Props> = ({
           .min(1, "Must be 255 characters or more"),
         ResponseThree: Yup.string()
           .max(255, "Must be 255 characters or less")
-          .required("Required")
           .min(1, "Must be 255 characters or more"),
         ResponseFour: Yup.string()
           .max(255, "Must be 255 characters or less")
-          .required("Required")
           .min(1, "Must be 255 characters or more"),
       })}
       onSubmit={(
@@ -93,19 +87,49 @@ export const AddQuestion: React.FC<Props> = ({
         },
         { setSubmitting }
       ) => {
-        const questionAdded: any = axios.post(
-          `http://localhost:3001/question/add/${questionsfield}`,
-          {
-            questionText: textQuestion,
-            answerOption: [
-              { answerText: ResponseOne, isCorrect: responseOneIsCorrect },
-              { answerText: ResponseTwo, isCorrect: responseTwoIsCorrect },
-              { answerText: ResponseThree, isCorrect: responseThreeIsCorrect },
-              { answerText: ResponseFour, isCorrect: responseFourIsCorrect },
-            ],
-          }
-        );
-        console.log(questionsfield);
+        if (ResponseThree === "") {
+          const questionAdded: any = axios.post(
+            `http://localhost:3001/question/add/${questionsfield}`,
+            {
+              questionText: textQuestion,
+              answerOption: [
+                { answerText: ResponseOne, isCorrect: responseOneIsCorrect },
+                { answerText: ResponseTwo, isCorrect: responseTwoIsCorrect },
+              ],
+            }
+          );
+        } else if (ResponseFour === "" && ResponseThree.length > 1) {
+          const questionAdded: any = axios.post(
+            `http://localhost:3001/question/add/${questionsfield}`,
+            {
+              questionText: textQuestion,
+              answerOption: [
+                { answerText: ResponseOne, isCorrect: responseOneIsCorrect },
+                { answerText: ResponseTwo, isCorrect: responseTwoIsCorrect },
+                {
+                  answerText: ResponseThree,
+                  isCorrect: responseThreeIsCorrect,
+                },
+              ],
+            }
+          );
+        } else {
+          const questionAdded: any = axios.post(
+            `http://localhost:3001/question/add/${questionsfield}`,
+            {
+              questionText: textQuestion,
+              answerOption: [
+                { answerText: ResponseOne, isCorrect: responseOneIsCorrect },
+                { answerText: ResponseTwo, isCorrect: responseTwoIsCorrect },
+                {
+                  answerText: ResponseThree,
+                  isCorrect: responseThreeIsCorrect,
+                },
+                { answerText: ResponseFour, isCorrect: responseFourIsCorrect },
+              ],
+            }
+          );
+        }
       }}
     >
       {isAuthenticatedAsAdmin ? (

@@ -4,12 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./changePassword.css";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 import { Loading } from "../gamePages/Loading";
-
-//  setUserInfoToFalse: () => void;
-//onClick={() => {setUserInfoToFalse();}}
-//setUserInfoToFalse
 
 interface Props {
   setUserInfoToFalse: () => void;
@@ -30,7 +25,6 @@ export const ChangePassword: React.FC<Props> = ({ setUserInfoToFalse }) => {
     setLoading(false);
   }, []);
 
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(true);
 
   return (

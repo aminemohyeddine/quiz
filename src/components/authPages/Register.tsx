@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./Register.css";
@@ -13,7 +13,6 @@ interface Props {
   phoneNumber: string;
 }
 export const SignUp: React.FC = () => {
-  const history = useHistory();
   const [message, setMessage] = useState("");
 
   const fetchProducts = async (
@@ -83,7 +82,6 @@ export const SignUp: React.FC = () => {
             values.userName,
             values.phoneNumber
           );
-          // firstName, lastName, email, password, userName, phoneNumber;
         }}
       >
         {({ errors, touched }) => (
@@ -92,7 +90,6 @@ export const SignUp: React.FC = () => {
               <div className="welcomeSection">
                 <h1>Welcome</h1>
                 <br></br> <p>You are 30 seconds away from getting started!</p>
-                <button className="loginBtn">login</button>
               </div>
               <div className="singUpFormContainer">
                 <h3>{message}</h3>

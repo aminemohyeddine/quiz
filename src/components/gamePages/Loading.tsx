@@ -1,7 +1,5 @@
-import React from "react";
 import Loader from "react-loader-spinner";
 import "./loading.css";
-import loadingGif from "../../images/ATB3o.gif";
 
 export const Loading = () => {
   return (

@@ -23,7 +23,6 @@
 }
 .formContainer {
   border-radius: 20px;
-
   margin-top: 90px;
   color: rgb(0, 0, 0);
   background-color: #f8f9fa;
@@ -46,7 +45,7 @@ label {
   font-size: 40px;
 }
 .loginIcon {
-  top: 147px;
+  top: 180px;
   position: absolute;
   border-radius: 50%;
   display: flex;
@@ -126,13 +125,20 @@ input:focus {
   position: relative;
   left: -59px;
 }
+.emptyDivError {
+  height: 15px;
+}
+.usernameErrorMessage,
+.passwordErrorMessage {
+  height: 20px;
+}
 @media (max-width: 400px) {
   .itemsContainer {
     height: 50vh;
   }
   .formContainer {
     margin-top: 00px;
-    height: 48vh;
+    height: 60vh;
     width: 200px;
   }
   .loginText {
@@ -176,7 +182,7 @@ input:focus {
     left: -30px;
   }
   .loginIcon {
-    top: 30vh;
+    top: 24vh;
     position: absolute;
     border-radius: 50%;
     display: flex;
