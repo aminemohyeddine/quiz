@@ -4,18 +4,11 @@ import { Link } from "react-router-dom";
 import javascriptImage from "../../images/javascript.png";
 import pythonImage from "../../images/python.png";
 
-//  setUserInfoToFalse: () => void;
-//onClick={() => {setUserInfoToFalse();}}
-//setUserInfoToFalse
-
 interface Props {
   setUserInfoToFalse: () => void;
 }
 
 export const CategoriesPage: React.FC<Props> = ({ setUserInfoToFalse }) => {
-  const JWT_TOKEN: string | null = JSON.parse(
-    localStorage.getItem("userToken") || "{}"
-  );
   const adminIsAuthenticated: boolean | null = JSON.parse(
     localStorage.getItem("adminAuth") || "{}"
   );
@@ -26,9 +19,6 @@ export const CategoriesPage: React.FC<Props> = ({ setUserInfoToFalse }) => {
     { categoryName: "Javascript", categorieImage: javascriptImage },
     { categoryName: "Python", categorieImage: pythonImage },
   ]);
-  useEffect(() => {
-    console.log(isAuthenticated);
-  });
 
   return (
     <>

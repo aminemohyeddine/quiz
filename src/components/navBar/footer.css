@@ -63,3 +63,18 @@ a:hover {
     margin-left: 50px;
   }
 }
+@media (max-width: 360px) {
+  .element {
+    font-size: 0.6rem;
+  }
+  .copyright {
+    font-size: 0.6rem;
+  }
+  .facebook {
+    margin-left: 10px;
+  }
+  .twitter,
+  .instagram {
+    margin-left: 10px;
+  }
+}

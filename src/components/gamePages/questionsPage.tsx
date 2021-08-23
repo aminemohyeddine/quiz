@@ -10,7 +10,7 @@ import { MustLogin } from "../authPages/mustLogin";
 import { Loading } from "./Loading";
 
 interface Props {
-  isAuthenticated: boolean;
+  isAuthenticated: boolean | null;
 }
 
 export const QuestionsPage: React.FC<Props> = ({ isAuthenticated }) => {
@@ -43,6 +43,8 @@ export const QuestionsPage: React.FC<Props> = ({ isAuthenticated }) => {
   );
   const reduxData: AllDataStructure[] = stateData.allQuestionsData;
 
+  // shuffleData
+
   //getting the current User Data
   const [name, setName] = useState("");
   const [isUser, setIsUser] = useState(false);
@@ -59,7 +61,6 @@ export const QuestionsPage: React.FC<Props> = ({ isAuthenticated }) => {
     } else {
       setFirstGame(false);
     }
-    setIsUser(true);
     setName(data.data.firstName);
   };
   //end of getting data
@@ -71,7 +72,9 @@ export const QuestionsPage: React.FC<Props> = ({ isAuthenticated }) => {
   };
 
   useEffect(() => {
-    dispatch(getAllData(dataBackEnd));
+    if (isAuthenticated) {
+      dispatch(getAllData(dataBackEnd));
+    }
   }, [dataBackEnd]);
 
   useEffect(() => {

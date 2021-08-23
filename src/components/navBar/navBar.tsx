@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import "./navBar.css";
 import { Loading } from "../gamePages/Loading";
 
 interface Props {
+  localStorageAdminIsAuthenticated: boolean | null;
+  localStorageIsAuthenticated: boolean | null;
   getUserData: () => void;
   isAuthenticated: boolean;
   setIsAuthenticated: React.Dispatch<React.SetStateAction<any>>;
@@ -22,13 +23,11 @@ interface Props {
 }
 
 export const NavBar: React.FC<Props> = ({
+  localStorageAdminIsAuthenticated,
+  localStorageIsAuthenticated,
   showUserInfo,
   setShowUserInfo,
-  name,
-  getUserData,
-  isAuthenticated,
   setIsAuthenticated,
-  adminIsAuthenticated,
   setAdminIsAuthenticated,
   logOutHandler,
   isLoading,
@@ -36,22 +35,7 @@ export const NavBar: React.FC<Props> = ({
   isEditedClass,
   setIsEditedClass,
 }) => {
-  const localStorageIsAuthenticated: boolean = JSON.parse(
-    localStorage.getItem("isAuthenticated") || "{}"
-  );
   const storageName: string | null = localStorage.getItem("name") || "{}";
-
-  const localStorageAdminIsAuthenticated: boolean = JSON.parse(
-    localStorage.getItem("adminAuth") || "{}"
-  );
-  //=>adminAuth
-  const JWT_TOKEN: string | null = JSON.parse(
-    localStorage.getItem("userToken") || "{}"
-  );
-
-  useEffect(() => {
-    console.log(localStorageAdminIsAuthenticated);
-  }, [localStorageAdminIsAuthenticated]);
 
   return (
     <>
@@ -78,7 +62,7 @@ export const NavBar: React.FC<Props> = ({
             </>
           ) : (
             <>
-              {JSON.parse(localStorage.getItem("adminAuth") || "{}") ? (
+              {localStorageAdminIsAuthenticated ? (
                 <>
                   <div className="navBar">
                     <div className="logo">Dev Mode</div>
@@ -105,12 +89,6 @@ export const NavBar: React.FC<Props> = ({
                           <div className="userBellowDiv">
                             <div className="userBellowDivItems">
                               <Link
-                                to="/profile"
-                                className="bellowItem profile"
-                              >
-                                profile
-                              </Link>
-                              <Link
                                 to="/changepassword"
                                 className="bellowItem changePassword"
                               >
@@ -119,8 +97,8 @@ export const NavBar: React.FC<Props> = ({
                               <Link
                                 to="/login"
                                 onClick={() => {
-                                  logOutHandler();
                                   setShowUserInfo(!showUserInfo);
+                                  logOutHandler();
                                   setAdminIsAuthenticated(false);
                                   setIsAuthenticated(false);
                                 }}
@@ -189,29 +167,30 @@ export const NavBar: React.FC<Props> = ({
                   </div>
                 </>
               )}
+              {!localStorageIsAuthenticated &&
+              !localStorageAdminIsAuthenticated ? (
+                <div className="navBar">
+                  <div className="logo">Fill Your Mind</div>
+                  <div className="navBarInfos">
+                    <Link className="navInfo login" to="/login">
+                      <p>Login</p>
+                    </Link>
+
+                    <Link className="navInfo register" to="/register">
+                      <p>Register</p>
+                    </Link>
+
+                    <Link className="about" to="/about">
+                      <p>About</p>
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <></>
+              )}
             </>
           )}
         </>
-      )}
-      {!localStorageIsAuthenticated && !localStorageAdminIsAuthenticated ? (
-        <div className="navBar">
-          <div className="logo">Fill Your Mind</div>
-          <div className="navBarInfos">
-            <Link className="navInfo login" to="/login">
-              <p>Login</p>
-            </Link>
-
-            <Link className="navInfo register" to="/register">
-              <p>Register</p>
-            </Link>
-
-            <Link className="about" to="/about">
-              <p>About</p>
-            </Link>
-          </div>
-        </div>
-      ) : (
-        <></>
       )}
     </>
   );

@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 
 interface Props {
+  localStorageAdminIsAuthenticated: boolean | null;
   isAuthenticated: boolean;
   setIsAuthenticated: React.Dispatch<React.SetStateAction<any>>;
   adminIsAuthenticated: boolean;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export const LoginPage: React.FC<Props> = ({
+  localStorageAdminIsAuthenticated,
   isAuthenticated,
   setIsAuthenticated,
   adminIsAuthenticated,
@@ -56,9 +58,9 @@ export const LoginPage: React.FC<Props> = ({
         password: password,
       });
       if (user.data.login) {
+        localStorage.setItem("adminAuth", "true");
         localStorage.setItem("userToken", JSON.stringify(user.data.token));
         setAdminIsAuthenticated(true);
-        localStorage.setItem("adminAuth", "true");
         localStorage.setItem("name", user.data.currentUser.firstName);
         console.log(localStorage.getItem("adminAuth"));
         history.push("/categoriespage");
@@ -106,16 +108,25 @@ export const LoginPage: React.FC<Props> = ({
                   </div>
 
                   <div className="loginText">Login here</div>
+
                   {errors.email ? (
                     <div className="usernameErrorMessage">
                       <ErrorMessage name="email" />
+                      &nbsp;
                     </div>
-                  ) : null}
+                  ) : (
+                    <div className="emptyDivError">&nbsp;</div>
+                  )}
+
                   {errors.password ? (
                     <div className="passwordErrorMessage">
                       <ErrorMessage name="password" />
+                      &nbsp;
                     </div>
-                  ) : null}
+                  ) : (
+                    <div className="emptyDivError">&nbsp;</div>
+                  )}
+
                   <label className="emailLabel">Email</label>
 
                   <Field

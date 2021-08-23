@@ -7,7 +7,6 @@ import { HomePage } from "./components/gamePages/homePage";
 import { SignUp } from "./components/authPages/Register";
 import { ResetPasswordPage } from "./components/authPages/resetPasswordPage";
 import { LoginPage } from "./components/authPages/loginPage";
-import { Posts } from "./components/gamePages/posts";
 import { NavBar } from "./components/navBar/navBar";
 import { GreyPage } from "./components/navBar/greyPage";
 import { LeftBar } from "./components/navBar/leftBar";
@@ -16,6 +15,8 @@ import { ProfilePage } from "./components/gamePages/profilePage";
 import { CategoriesPage } from "./components/gamePages/CategoriesPage";
 import { AddQuestion } from "./components/devPages/addQuestion";
 import { ChangePassword } from "./components/authPages/changePassword";
+import { About } from "./components/gamePages/about";
+import { ContactPage } from "./components/gamePages/contactPage";
 
 function App() {
   const [name, setName] = useState<string>("");
@@ -34,12 +35,11 @@ function App() {
   const JWT_TOKEN: string | null = JSON.parse(
     localStorage.getItem("userToken") || "{}"
   );
-  const localStorageIsAuthenticated: string | null = JSON.parse(
+  const localStorageIsAuthenticated: boolean | null = JSON.parse(
     localStorage.getItem("isAuthenticated") || "{}"
   );
-  const storageName: string | null = localStorage.getItem("name") || "{}";
 
-  const localStorageAdminIsAuthenticated: string | null = JSON.parse(
+  const localStorageAdminIsAuthenticated: boolean | null = JSON.parse(
     localStorage.getItem("adminAuth") || "{}"
   );
 
@@ -105,7 +105,6 @@ function App() {
         token: JWT_TOKEN,
       });
     } catch (e) {
-      console.log("error");
       setIsAuthenticated(false);
       setAdminIsAuthenticated(false);
       localStorage.setItem("adminAuth", "false");
@@ -114,9 +113,9 @@ function App() {
   };
 
   useEffect(() => {
+    checkTheToken();
     getAuthFromLocalS();
     getUserData();
-    console.log(stillAuthorized);
   }, []);
 
   useEffect(() => {
@@ -132,6 +131,8 @@ function App() {
     <>
       <Router>
         <NavBar
+          localStorageAdminIsAuthenticated={localStorageAdminIsAuthenticated}
+          localStorageIsAuthenticated={localStorageIsAuthenticated}
           showUserInfo={showUserInfo}
           setShowUserInfo={setShowUserInfo}
           name={name}
@@ -152,6 +153,9 @@ function App() {
           setIsEditedClass={setIsEditedClass}
         />
         <LeftBar
+          logOutHandler={logOutHandler}
+          localStorageIsAuthenticated={localStorageIsAuthenticated}
+          localStorageAdminIsAuthenticated={localStorageAdminIsAuthenticated}
           isEditedClass={isEditedClass}
           setIsEditedClass={setIsEditedClass}
         />
@@ -173,6 +177,9 @@ function App() {
           </Route>
           <Route exact path="/login">
             <LoginPage
+              localStorageAdminIsAuthenticated={
+                localStorageAdminIsAuthenticated
+              }
               name={name}
               setName={setName}
               adminIsAuthenticated={adminIsAuthenticated}
@@ -183,7 +190,7 @@ function App() {
           </Route>
           {/* game and profile Pages */}
           <Route exact path="/game/:questionsfield">
-            <QuestionsPage isAuthenticated={isAuthenticated} />
+            <QuestionsPage isAuthenticated={localStorageIsAuthenticated} />
           </Route>
           <Route exact path="/profile">
             <ProfilePage
@@ -191,11 +198,15 @@ function App() {
               isAuthenticated={isAuthenticated}
             />
           </Route>
-          <Route exact path="/posts">
-            <Posts />
-          </Route>
+
           <Route exact path="/reset">
             <ResetPasswordPage />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+          <Route exact path="/contact">
+            <ContactPage />
           </Route>
           <Route exact path="/categoriespage">
             <CategoriesPage setUserInfoToFalse={setUserInfoToFalse} />
