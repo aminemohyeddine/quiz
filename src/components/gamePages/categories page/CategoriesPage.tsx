@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./CategoriesPage.css";
 import { Link } from "react-router-dom";
-import javascriptImage from "../../images/javascript.png";
-import pythonImage from "../../images/python.png";
+import javascriptImage from "../../../images/javascript.png";
+import pythonImage from "../../../images/python.png";
 
 interface Props {
   setUserInfoToFalse: () => void;

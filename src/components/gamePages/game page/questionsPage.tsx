@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../redux/store";
+import type { RootState } from "../../../redux/store";
 import "./questionsPage.css";
-import { AllDataStructure } from "../../redux/interfacesTypes/types";
-import { getAllData } from "../../redux/actions/quizDataAction";
+import { AllDataStructure } from "../../../redux/interfacesTypes/types";
+import { getAllData } from "../../../redux/actions/quizDataAction";
 import axios from "axios";
-import { MustLogin } from "../authPages/mustLogin";
-import { Loading } from "./Loading";
+import { MustLogin } from "../../authPages/mustLogin";
+import { Loading } from "../loading page/Loading";
 
 interface Props {
   isAuthenticated: boolean | null;

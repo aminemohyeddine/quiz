@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./navBar.css";
-import { Loading } from "../gamePages/Loading";
+import { Loading } from "../gamePages/loading page/Loading";
 
 interface Props {
   localStorageAdminIsAuthenticated: boolean | null;

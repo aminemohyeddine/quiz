@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { MustLogin } from "../authPages/mustLogin";
+import { MustLogin } from "../../authPages/mustLogin";
 import { ImageSlider } from "./imageSlider";
-import { Loading } from "./Loading";
+import { Loading } from "../loading page/Loading";
 import "./profilePage.css";
 
 interface profilePageProps {

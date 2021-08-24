@@ -4,7 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./addQuestion.css";
 import { useParams } from "react-router-dom";
-import { Loading } from "../gamePages/Loading";
+import { Loading } from "../gamePages/loading page/Loading";
 
 interface Props {
   setUserInfoToFalse: () => void;
