@@ -169,7 +169,11 @@ export const AddQuestion: React.FC<Props> = ({
                           type="text"
                           placeholder="type first question"
                         />
-                        <Field as="select" name="responseOneIsCorrect">
+                        <Field
+                          className="isTrueSection"
+                          as="select"
+                          name="responseOneIsCorrect"
+                        >
                           <option value="true">true</option>
                           <option value="false">false</option>
                         </Field>
@@ -184,7 +188,11 @@ export const AddQuestion: React.FC<Props> = ({
                           type="text"
                           placeholder="type 2nd question"
                         />
-                        <Field as="select" name="responseTwoIsCorrect">
+                        <Field
+                          as="select"
+                          className="isTrueSection"
+                          name="responseTwoIsCorrect"
+                        >
                           <option value="true">true</option>
                           <option value="false">false</option>
                         </Field>
@@ -200,7 +208,11 @@ export const AddQuestion: React.FC<Props> = ({
                           placeholder="type 3rd question"
                         />
 
-                        <Field as="select" name="responseThreeIsCorrect">
+                        <Field
+                          as="select"
+                          className="isTrueSection"
+                          name="responseThreeIsCorrect"
+                        >
                           <option value="true">true</option>
                           <option value="false">false</option>
                         </Field>
@@ -216,7 +228,11 @@ export const AddQuestion: React.FC<Props> = ({
                           placeholder="type 4th question"
                         />
 
-                        <Field as="select" name="responseFourIsCorrect">
+                        <Field
+                          as="select"
+                          className="isTrueSection"
+                          name="responseFourIsCorrect"
+                        >
                           <option value="true">true</option>
                           <option value="false">false</option>
                         </Field>

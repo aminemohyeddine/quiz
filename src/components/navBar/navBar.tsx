@@ -67,10 +67,7 @@ export const NavBar: React.FC<Props> = ({
                   <div className="navBar">
                     <div className="logo">Dev Mode</div>
                     <div className="navBarInfos">
-                      <Link
-                        className="navInfo login"
-                        to="/dev/addquestion/javascript"
-                      >
+                      <Link className="navInfo login" to="/categoriespage">
                         <p>add a question</p>
                       </Link>
                       <div

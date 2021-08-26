@@ -27,3 +27,6 @@
   align-items: center;
   flex-direction: column;
 }
+.rules {
+  margin-left: 20px;
+}

@@ -1,5 +1,5 @@
 .homePageContainer {
-  height: 200vh;
+  height: 150vh;
 }
 .headerContainer {
   display: flex;
@@ -11,7 +11,7 @@
 .headerTextContainer {
   margin-top: 60px;
   display: flex;
-  width: 100%;
+  width: 80%;
   flex-direction: column;
   align-items: center;
 }
@@ -43,8 +43,11 @@
 }
 
 .informationItemsContainer {
-  padding-left: 20px;
-  padding-top: 20px;
+  margin-left: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
 }
 
 .infoTitle {
@@ -67,10 +70,99 @@
   font-size: 1.6rem;
 }
 .categoriesImagesSlider {
-  background-color: black;
   margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-  width: 97%;
-  height: 40vh;
+  height: 50vh;
+}
+
+@media (max-width: 900px) {
+  .headerBigText {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  .headerSmallText {
+    color: white;
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+  }
+  .headerContainer {
+    display: flex;
+    justify-content: center;
+    height: 40vh;
+    background-color: black;
+    background: linear-gradient(to right, #ff333d 0%, #d91ceb 100%);
+  }
+}
+@media (max-width: 730px) {
+  .headerBigText {
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+  .headerSmallText {
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+  }
+  .getStartedButton {
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    border: none;
+    height: 40px;
+    width: 170px;
+  }
+  .headerContainer {
+    display: flex;
+    justify-content: center;
+    height: 35vh;
+    background-color: black;
+    background: linear-gradient(to right, #ff333d 0%, #d91ceb 100%);
+  }
+}
+
+@media (max-width: 600px) {
+  .headerBigText {
+    color: white;
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+  }
+  .headerSmallText {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+  .getStartedButton {
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    border: none;
+    height: 40px;
+    width: 150px;
+  }
+  .headerContainer {
+    display: flex;
+    justify-content: center;
+    height: 30vh;
+    background-color: black;
+    background: linear-gradient(to right, #ff333d 0%, #d91ceb 100%);
+  }
+}
+
+@media (max-width: 500px) {
+  .headerBigText {
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+  }
+  .headerSmallText {
+    color: white;
+    font-size: 0.8rem;
+    margin-bottom: 30px;
+  }
+  .getStartedButton {
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    border: none;
+    height: 40px;
+    width: 150px;
+  }
 }

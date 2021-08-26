@@ -19,6 +19,7 @@ import { About } from "./components/gamePages/about page/about";
 import { ContactPage } from "./components/gamePages/contact page/contactPage";
 
 function App() {
+  const [isCategoryInHomePage, setIsCategoryInHomePage] = useState(false);
   const [name, setName] = useState<string>("");
   const [stillAuthorized, setStillAuthorized] = useState<boolean>(false);
 
@@ -161,12 +162,13 @@ function App() {
         />
         {/* //SignUp */}
         <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
           {/* Login and register Pages change password /changepassword */}
           <Route exact path="/register">
-            <SignUp />
+            <SignUp
+              setUserInfoToFalse={() => {
+                setUserInfoToFalse();
+              }}
+            />
           </Route>
           <Route exact path="/changepassword">
             <ChangePassword
@@ -177,6 +179,9 @@ function App() {
           </Route>
           <Route exact path="/login">
             <LoginPage
+              setUserInfoToFalse={() => {
+                setUserInfoToFalse();
+              }}
               localStorageAdminIsAuthenticated={
                 localStorageAdminIsAuthenticated
               }
@@ -190,10 +195,20 @@ function App() {
           </Route>
           {/* game and profile Pages */}
           <Route exact path="/game/:questionsfield">
-            <QuestionsPage isAuthenticated={localStorageIsAuthenticated} />
+            <QuestionsPage
+              setUserInfoToFalse={() => {
+                setUserInfoToFalse();
+              }}
+              isAuthenticated={localStorageIsAuthenticated}
+            />
           </Route>
           <Route exact path="/profile">
             <ProfilePage
+              setUserInfoToFalse={() => {
+                setUserInfoToFalse();
+              }}
+              isCategoryInHomePage={isCategoryInHomePage}
+              setIsCategoryInHomePage={setIsCategoryInHomePage}
               setIsAuthenticated={setIsAuthenticated}
               isAuthenticated={isAuthenticated}
             />
@@ -210,6 +225,15 @@ function App() {
           </Route>
           <Route exact path="/categoriespage">
             <CategoriesPage setUserInfoToFalse={setUserInfoToFalse} />
+          </Route>
+          <Route exact path="/">
+            <HomePage
+              setUserInfoToFalse={() => {
+                setUserInfoToFalse();
+              }}
+              isCategoryInHomePage={isCategoryInHomePage}
+              setIsCategoryInHomePage={setIsCategoryInHomePage}
+            />
           </Route>
           {/* dev routes */}
           <Route exact path="/dev/addQuestion/:questionsfield">

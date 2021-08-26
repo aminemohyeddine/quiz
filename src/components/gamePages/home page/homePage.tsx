@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./homePage.css";
 import { Link } from "react-router-dom";
 import { CategoriesHomePage } from "./categoriesHomePage";
 
-export const HomePage: React.FC = () => {
+interface Props {
+  setUserInfoToFalse: () => void;
+
+  isCategoryInHomePage: boolean;
+  setIsCategoryInHomePage: React.Dispatch<React.SetStateAction<any>>;
+}
+export const HomePage: React.FC<Props> = ({
+  setUserInfoToFalse,
+  isCategoryInHomePage,
+  setIsCategoryInHomePage,
+}) => {
+  //mounted component
+  useEffect(() => {
+    setIsCategoryInHomePage(true);
+  }, []);
+  useEffect(() => () => setIsCategoryInHomePage(false), []);
+
   return (
-    <div className="homePageContainer">
+    <div
+      className="homePageContainer"
+      onClick={() => {
+        setUserInfoToFalse();
+      }}
+    >
       <div className="headerContainer">
         <div className="headerTextContainer">
           <div className="headerBigText">welcome to fill your mind</div>
@@ -38,7 +59,10 @@ export const HomePage: React.FC = () => {
           scroll left and right to check categories :
         </div>
         <div className="categoriesImagesSlider">
-          <CategoriesHomePage />
+          <CategoriesHomePage
+            isCategoryInHomePage={isCategoryInHomePage}
+            setIsCategoryInHomePage={setIsCategoryInHomePage}
+          />
         </div>
       </div>
     </div>
