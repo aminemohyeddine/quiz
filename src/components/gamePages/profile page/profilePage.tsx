@@ -1,18 +1,28 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { MustLogin } from "../authPages/mustLogin";
+import { MustLogin } from "../../authPages/mustLogin";
 import { ImageSlider } from "./imageSlider";
-import { Loading } from "./Loading";
+import { Loading } from "../loading page/Loading";
 import "./profilePage.css";
+import { CategoriesHomePage } from "../home page/categoriesHomePage";
 
 interface profilePageProps {
+  setUserInfoToFalse: () => void;
   isAuthenticated: boolean;
   setIsAuthenticated: React.Dispatch<React.SetStateAction<any>>;
+  isCategoryInHomePage: boolean;
+  setIsCategoryInHomePage: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export const ProfilePage: React.FC<profilePageProps> = ({
+  setUserInfoToFalse,
+  isCategoryInHomePage,
+  setIsCategoryInHomePage,
   setIsAuthenticated,
 }) => {
+  useEffect(() => {
+    console.log(isCategoryInHomePage);
+  }, []);
   //getting the current User Data
 
   const [totalGames, setTotalGames] = useState<number>(0);
@@ -103,13 +113,23 @@ export const ProfilePage: React.FC<profilePageProps> = ({
     <>
       {localStorageIsAuthenticated ? (
         <>
-          <div className="profilePageContainer">
+          <div
+            className="profilePageContainer"
+            onClick={() => {
+              setUserInfoToFalse();
+            }}
+          >
             {name === undefined || name === "" ? (
               <Loading />
             ) : (
               <>
                 {" "}
-                <h1 className="welcomeMessage">
+                <h1
+                  className="welcomeMessage"
+                  onClick={() => {
+                    setUserInfoToFalse();
+                  }}
+                >
                   welcome {name} to fill your mind!
                 </h1>
                 <div className="dataNewsContainer">
@@ -171,6 +191,7 @@ export const ProfilePage: React.FC<profilePageProps> = ({
                               className="categoriesButton"
                               onClick={() => {
                                 setIsCategory(true);
+                                setUserInfoToFalse();
                               }}
                             >
                               Categories
@@ -188,12 +209,27 @@ export const ProfilePage: React.FC<profilePageProps> = ({
                       </div>
                       {isCategory ? (
                         <>
-                          <div className="contentContainer">
-                            <ImageSlider />
+                          <div
+                            className="contentContainer"
+                            onClick={() => {
+                              setUserInfoToFalse();
+                            }}
+                          >
+                            <CategoriesHomePage
+                              isCategoryInHomePage={isCategoryInHomePage}
+                              setIsCategoryInHomePage={setIsCategoryInHomePage}
+                            />
                           </div>
                         </>
                       ) : (
-                        <div className="contentContainer">soon...</div>
+                        <div
+                          className="contentContainer"
+                          onClick={() => {
+                            setUserInfoToFalse();
+                          }}
+                        >
+                          soon...
+                        </div>
                       )}
                     </div>
                   </div>

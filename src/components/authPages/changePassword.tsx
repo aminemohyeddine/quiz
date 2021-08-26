@@ -4,7 +4,8 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./changePassword.css";
 import { useDispatch } from "react-redux";
-import { Loading } from "../gamePages/Loading";
+import { Loading } from "../gamePages/loading page/Loading";
+import { MustLogin } from "./mustLogin";
 
 interface Props {
   setUserInfoToFalse: () => void;
@@ -178,7 +179,9 @@ export const ChangePassword: React.FC<Props> = ({ setUserInfoToFalse }) => {
             )}
           </>
         ) : (
-          <>login first</>
+          <>
+            <MustLogin />
+          </>
         )}
       </>
     </Formik>

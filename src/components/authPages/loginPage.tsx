@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 
 interface Props {
+  setUserInfoToFalse: () => void;
   localStorageAdminIsAuthenticated: boolean | null;
   isAuthenticated: boolean;
   setIsAuthenticated: React.Dispatch<React.SetStateAction<any>>;
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export const LoginPage: React.FC<Props> = ({
+  setUserInfoToFalse,
   localStorageAdminIsAuthenticated,
   isAuthenticated,
   setIsAuthenticated,
@@ -98,7 +100,11 @@ export const LoginPage: React.FC<Props> = ({
         }}
       >
         {({ errors, touched }) => (
-          <Form>
+          <Form
+            onClick={() => {
+              setUserInfoToFalse();
+            }}
+          >
             <div className="LoginPageContainer">
               <div className="formContainer">
                 <div className="itemsContainer">

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
-import { QuestionsPage } from "./components/gamePages/questionsPage";
+import { QuestionsPage } from "./components/gamePages/game page/questionsPage";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { HomePage } from "./components/gamePages/homePage";
+import { HomePage } from "./components/gamePages/home page/homePage";
 import { SignUp } from "./components/authPages/Register";
 import { ResetPasswordPage } from "./components/authPages/resetPasswordPage";
 import { LoginPage } from "./components/authPages/loginPage";
@@ -11,14 +11,15 @@ import { NavBar } from "./components/navBar/navBar";
 import { GreyPage } from "./components/navBar/greyPage";
 import { LeftBar } from "./components/navBar/leftBar";
 import { Footer } from "./components/navBar/footer";
-import { ProfilePage } from "./components/gamePages/profilePage";
-import { CategoriesPage } from "./components/gamePages/CategoriesPage";
+import { ProfilePage } from "./components/gamePages/profile page/profilePage";
+import { CategoriesPage } from "./components/gamePages/categories page/CategoriesPage";
 import { AddQuestion } from "./components/devPages/addQuestion";
 import { ChangePassword } from "./components/authPages/changePassword";
-import { About } from "./components/gamePages/about";
-import { ContactPage } from "./components/gamePages/contactPage";
+import { About } from "./components/gamePages/about page/about";
+import { ContactPage } from "./components/gamePages/contact page/contactPage";
 
 function App() {
+  const [isCategoryInHomePage, setIsCategoryInHomePage] = useState(false);
   const [name, setName] = useState<string>("");
   const [stillAuthorized, setStillAuthorized] = useState<boolean>(false);
 
@@ -161,12 +162,13 @@ function App() {
         />
         {/* //SignUp */}
         <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
           {/* Login and register Pages change password /changepassword */}
           <Route exact path="/register">
-            <SignUp />
+            <SignUp
+              setUserInfoToFalse={() => {
+                setUserInfoToFalse();
+              }}
+            />
           </Route>
           <Route exact path="/changepassword">
             <ChangePassword
@@ -177,6 +179,9 @@ function App() {
           </Route>
           <Route exact path="/login">
             <LoginPage
+              setUserInfoToFalse={() => {
+                setUserInfoToFalse();
+              }}
               localStorageAdminIsAuthenticated={
                 localStorageAdminIsAuthenticated
               }
@@ -190,10 +195,20 @@ function App() {
           </Route>
           {/* game and profile Pages */}
           <Route exact path="/game/:questionsfield">
-            <QuestionsPage isAuthenticated={localStorageIsAuthenticated} />
+            <QuestionsPage
+              setUserInfoToFalse={() => {
+                setUserInfoToFalse();
+              }}
+              isAuthenticated={localStorageIsAuthenticated}
+            />
           </Route>
           <Route exact path="/profile">
             <ProfilePage
+              setUserInfoToFalse={() => {
+                setUserInfoToFalse();
+              }}
+              isCategoryInHomePage={isCategoryInHomePage}
+              setIsCategoryInHomePage={setIsCategoryInHomePage}
               setIsAuthenticated={setIsAuthenticated}
               isAuthenticated={isAuthenticated}
             />
@@ -210,6 +225,15 @@ function App() {
           </Route>
           <Route exact path="/categoriespage">
             <CategoriesPage setUserInfoToFalse={setUserInfoToFalse} />
+          </Route>
+          <Route exact path="/">
+            <HomePage
+              setUserInfoToFalse={() => {
+                setUserInfoToFalse();
+              }}
+              isCategoryInHomePage={isCategoryInHomePage}
+              setIsCategoryInHomePage={setIsCategoryInHomePage}
+            />
           </Route>
           {/* dev routes */}
           <Route exact path="/dev/addQuestion/:questionsfield">

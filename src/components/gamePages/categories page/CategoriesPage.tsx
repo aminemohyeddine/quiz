@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./CategoriesPage.css";
 import { Link } from "react-router-dom";
-import javascriptImage from "../../images/javascript.png";
-import pythonImage from "../../images/python.png";
+import javascriptImage from "../../../images/javascript.png";
+import pythonImage from "../../../images/python.png";
 
 interface Props {
   setUserInfoToFalse: () => void;
@@ -38,7 +38,9 @@ export const CategoriesPage: React.FC<Props> = ({ setUserInfoToFalse }) => {
                   <Link className="categoryLink" to={categoryUrl}>
                     <div className="categoryContainer">
                       <div className="categoryName">
-                        <h4>{c.categoryName} Category</h4>
+                        <h4 className="categoryName">
+                          {c.categoryName} Category
+                        </h4>
                       </div>
                       <div className="categoryImage">
                         <img className="image" src={c.categorieImage} alt="" />
@@ -53,7 +55,12 @@ export const CategoriesPage: React.FC<Props> = ({ setUserInfoToFalse }) => {
       ) : null}
       {adminIsAuthenticated ? (
         <>
-          <div className="container">
+          <div
+            className="container"
+            onClick={() => {
+              setUserInfoToFalse();
+            }}
+          >
             <h1>Click on a category and add questions!</h1>
             <div className="categoriesContainer">
               {categories.map((c) => {
@@ -62,7 +69,9 @@ export const CategoriesPage: React.FC<Props> = ({ setUserInfoToFalse }) => {
                   <Link className="categoryLink" to={categoryUrl}>
                     <div className="categoryContainer">
                       <div className="categoryName">
-                        <h4>{c.categoryName} Category</h4>
+                        <h4 className="categoryName">
+                          {c.categoryName} Category
+                        </h4>
                       </div>
                       <div className="categoryImage">
                         <img className="image" src={c.categorieImage} alt="" />

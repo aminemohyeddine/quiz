@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../redux/store";
+import type { RootState } from "../../../redux/store";
 import "./questionsPage.css";
-import { AllDataStructure } from "../../redux/interfacesTypes/types";
-import { getAllData } from "../../redux/actions/quizDataAction";
+import { AllDataStructure } from "../../../redux/interfacesTypes/types";
+import { getAllData } from "../../../redux/actions/quizDataAction";
 import axios from "axios";
-import { MustLogin } from "../authPages/mustLogin";
-import { Loading } from "./Loading";
+import { MustLogin } from "../../authPages/mustLogin";
+import { Loading } from "../loading page/Loading";
 
 interface Props {
   isAuthenticated: boolean | null;
+  setUserInfoToFalse: () => void;
 }
 
-export const QuestionsPage: React.FC<Props> = ({ isAuthenticated }) => {
+export const QuestionsPage: React.FC<Props> = ({
+  isAuthenticated,
+  setUserInfoToFalse,
+}) => {
   //states
   const [answerIsShown, setAnswerIsShown] = useState<boolean>(false);
   const [totalTime, setTotalTime] = useState<number>(0);
@@ -191,15 +195,34 @@ export const QuestionsPage: React.FC<Props> = ({ isAuthenticated }) => {
       {isAuthenticated ? (
         <>
           {loading ? (
-            <div>loading ...</div>
+            <div
+              onClick={() => {
+                setUserInfoToFalse();
+              }}
+            >
+              loading ...
+            </div>
           ) : (
-            <div>
+            <div
+              onClick={() => {
+                setUserInfoToFalse();
+              }}
+            >
               {data === undefined || data.length === 0 ? (
                 <Loading />
               ) : (
-                <div>
+                <div
+                  onClick={() => {
+                    setUserInfoToFalse();
+                  }}
+                >
                   {showScore ? (
-                    <div className="scorePage">
+                    <div
+                      className="scorePage"
+                      onClick={() => {
+                        setUserInfoToFalse();
+                      }}
+                    >
                       <div className="score">
                         <div className="scoreText">
                           you got {score - 1} points out of {data.length}
@@ -208,7 +231,12 @@ export const QuestionsPage: React.FC<Props> = ({ isAuthenticated }) => {
                     </div>
                   ) : (
                     <>
-                      <div className="questionContainer">
+                      <div
+                        className="questionContainer"
+                        onClick={() => {
+                          setUserInfoToFalse();
+                        }}
+                      >
                         <div className="questions">
                           <div className="question-section">
                             <div className="question-count">

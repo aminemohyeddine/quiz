@@ -5,14 +5,9 @@ import "./Register.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 interface Props {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  userName: string;
-  phoneNumber: string;
+  setUserInfoToFalse: () => void;
 }
-export const SignUp: React.FC = () => {
+export const SignUp: React.FC<Props> = ({ setUserInfoToFalse }) => {
   const [message, setMessage] = useState("");
 
   const fetchProducts = async (
@@ -85,7 +80,11 @@ export const SignUp: React.FC = () => {
         }}
       >
         {({ errors, touched }) => (
-          <Form>
+          <Form
+            onClick={() => {
+              setUserInfoToFalse();
+            }}
+          >
             <div className="signUp">
               <div className="welcomeSection">
                 <h1>Welcome</h1>

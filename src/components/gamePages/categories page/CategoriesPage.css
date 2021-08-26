@@ -4,6 +4,9 @@
   justify-content: center;
   display: flex;
 }
+.categoryName {
+  color: white;
+}
 
 .container {
   height: 90vh;
@@ -33,7 +36,7 @@
 
 .categoryContainer {
 }
-.categoryName:hover {
+.categoryLink:hover .categoryName {
   color: yellow;
 }
 .categoryName {

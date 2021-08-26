@@ -72,7 +72,7 @@ export const LeftBar: React.FC<Props> = ({
                 setIsEditedClass(false);
               }}
               className="sideBar rules"
-              to="/rules"
+              to="/changepassword"
             >
               <p>change password</p>
             </Link>
@@ -96,7 +96,7 @@ export const LeftBar: React.FC<Props> = ({
                 setIsEditedClass(false);
               }}
               className="sideBar rules"
-              to="/rules"
+              to="/profile"
             >
               <p>profile</p>
             </Link>
@@ -106,7 +106,7 @@ export const LeftBar: React.FC<Props> = ({
                 setIsEditedClass(false);
               }}
               className="sideBar login"
-              to="/login"
+              to="/changepassword"
             >
               <p>change password</p>
             </Link>
