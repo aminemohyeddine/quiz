@@ -1,8 +1,8 @@
-.imageContaine {
+.imageContainer {
   margin-left: 18px;
   position: relative;
   display: flex;
-  width: 95%;
+  width: 100%;
   height: 300px;
 }
 .imgCat {
@@ -19,7 +19,6 @@
   cursor: pointer;
   position: absolute;
   text-align: center;
-
   height: 30px;
   width: 50px;
   left: 96%;
@@ -30,7 +29,6 @@
 }
 .previousButton {
   border-radius: 20px;
-
   display: flex;
   align-items: center;
   justify-content: center;
