@@ -6,7 +6,7 @@
 .categoryName {
   color: black;
 }
-.categoriesTitle {
+.categoriesTittle {
   padding-top: 30px;
 }
 
@@ -45,18 +45,20 @@
   margin: 10px 0px 10px 0px;
   text-align: center;
 }
-h1 {
-  text-align: center;
+.titleContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
 @media (max-width: 800px) {
-  .categoriesTitle {
+  .categoriesTittle {
     font-size: 1.5rem;
   }
 }
 @media (max-width: 600px) {
-  .categoriesTitle {
-    font-size: 1.3rem;
+  .categoriesTittle {
+    font-size: 1.2rem;
   }
   .categoriesContainer {
     flex-direction: column;

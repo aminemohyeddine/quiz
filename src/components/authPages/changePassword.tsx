@@ -33,18 +33,27 @@ export const ChangePassword: React.FC<Props> = ({ setUserInfoToFalse }) => {
       initialValues={{
         oldPassword: "",
         newPassword: "",
+        retypeNewPassword: "",
       }}
       validationSchema={Yup.object({
         oldPassword: Yup.string()
           .max(255, "Must be 255 characters or less")
           .required("Required")
-          .min(6, "Must be 255 characters or more"),
+          .min(6, "Must be 6 characters or more"),
         newPassword: Yup.string()
           .max(255, "Must be 255 characters or less")
           .required("Required")
-          .min(1, "Must be 255 characters or more"),
+          .min(6, "Must be 6 characters or more"),
+        retypeNewPassword: Yup.string()
+          .max(255, "Must be 255 characters or less")
+          .required("Required")
+          .min(6, "Must be 6 characters or more")
+          .oneOf([Yup.ref("newPassword"), null], "Passwords must match"),
       })}
-      onSubmit={async ({ oldPassword, newPassword }, { setSubmitting }) => {
+      onSubmit={async (
+        { oldPassword, newPassword, retypeNewPassword },
+        { setSubmitting }
+      ) => {
         if (isAuthenticated) {
           const data: any = await axios.post(
             "http://localhost:3001/user/changepassword",
@@ -95,32 +104,48 @@ export const ChangePassword: React.FC<Props> = ({ setUserInfoToFalse }) => {
                     className="ChangePasswordContainer"
                   >
                     <div className="changePasswordFormContainer">
-                      <h1 className="changePasswordMainMessage">
-                        Change your Password
-                      </h1>
-                      <p>{changePasswordMessage}</p>
-                      <div className="changePasswordForms">
-                        <div className="changePasswordErrorDiv changePasswordErrorTextQuestion">
-                          <ErrorMessage name="oldPassword" />
+                      <div className="formItems">
+                        <h1 className="changePasswordMainMessage">
+                          Change your Password user
+                        </h1>
+                        <p>{changePasswordMessage}</p>
+                        <div className="changePasswordForms">
+                          <div className="changePasswordErrorDiv changePasswordErrorTextQuestion">
+                            <ErrorMessage name="oldPassword" />
+                          </div>
+                          <Field
+                            className="inputChangePassword oldPasswordInput"
+                            name="oldPassword"
+                            type="text"
+                            placeholder="type old password"
+                          />
+
+                          <div className="changePasswordErrorDiv changePasswordErrorResponseOne">
+                            <ErrorMessage name="newPassword" />
+                          </div>
+                          <Field
+                            className="inputChangePassword newPasswordInput"
+                            name="newPassword"
+                            type="text"
+                            placeholder="type new password"
+                          />
+
+                          <div className="changePasswordErrorDiv changePasswordError">
+                            <ErrorMessage name="retypeNewPassword" />
+                          </div>
+                          <Field
+                            className="inputChangePassword retypeNewPasswordInput"
+                            name="retypeNewPassword"
+                            type="text"
+                            placeholder="re-type new password"
+                          />
+                          <button
+                            className="changePasswordButton"
+                            type="submit"
+                          >
+                            Submit
+                          </button>
                         </div>
-                        <Field
-                          className="oldPasswordInput"
-                          name="oldPassword"
-                          type="text"
-                          placeholder="type old password"
-                        />
-                        <div className="changePasswordErrorDiv changePasswordErrorResponseOne">
-                          <ErrorMessage name="newPassword" />
-                        </div>
-                        <Field
-                          className="newPasswordInput"
-                          name="newPassword"
-                          type="text"
-                          placeholder="type new password"
-                        />
-                        <button className="changePasswordButton" type="submit">
-                          Submit
-                        </button>
                       </div>
                     </div>
                   </div>
@@ -128,8 +153,8 @@ export const ChangePassword: React.FC<Props> = ({ setUserInfoToFalse }) => {
               </>
             )}
           </>
-        ) : isAuthenticated && !adminIsAuthenticated ? (
-          <>login first user</>
+        ) : !isAuthenticated && !adminIsAuthenticated ? (
+          <>{<MustLogin />}</>
         ) : null}
         {!isAuthenticated && adminIsAuthenticated ? (
           <>
@@ -145,32 +170,47 @@ export const ChangePassword: React.FC<Props> = ({ setUserInfoToFalse }) => {
                     className="ChangePasswordContainer"
                   >
                     <div className="changePasswordFormContainer">
-                      <h1 className="changePasswordMainMessage">
-                        Change your Password
-                      </h1>
-                      <p>{changePasswordMessage}</p>
-                      <div className="changePasswordForms">
-                        <div className="changePasswordErrorDiv changePasswordErrorTextQuestion">
-                          <ErrorMessage name="oldPassword" />
+                      <div className="formItems">
+                        <h1 className="changePasswordMainMessage">
+                          Change your Password admin
+                        </h1>
+                        <p>{changePasswordMessage + " "}</p>
+                        <div className="changePasswordForms">
+                          <div className="changePasswordErrorDiv changePasswordErrorTextQuestion">
+                            <ErrorMessage name="oldPassword" />
+                          </div>
+                          <Field
+                            className="inputChangePassword oldPasswordInput"
+                            name="oldPassword"
+                            type="text"
+                            placeholder="type old password"
+                          />
+                          <div className="changePasswordErrorDiv changePasswordErrorResponseOne">
+                            <ErrorMessage name="newPassword" />
+                          </div>
+                          <Field
+                            className="inputChangePassword newPasswordInput"
+                            name="newPassword"
+                            type="text"
+                            placeholder="type new password"
+                          />
+
+                          <div className="changePasswordErrorDiv changePasswordError">
+                            <ErrorMessage name="retypeNewPassword" />
+                          </div>
+                          <Field
+                            className="inputChangePassword retypeNewPasswordInput"
+                            name="retypeNewPassword"
+                            type="text"
+                            placeholder="re-type new password"
+                          />
+                          <button
+                            className="changePasswordButton"
+                            type="submit"
+                          >
+                            Submit
+                          </button>
                         </div>
-                        <Field
-                          className="oldPasswordInput"
-                          name="oldPassword"
-                          type="text"
-                          placeholder="type old password"
-                        />
-                        <div className="changePasswordErrorDiv changePasswordErrorResponseOne">
-                          <ErrorMessage name="newPassword" />
-                        </div>
-                        <Field
-                          className="newPasswordInput"
-                          name="newPassword"
-                          type="text"
-                          placeholder="type new password"
-                        />
-                        <button className="changePasswordButton" type="submit">
-                          Submit
-                        </button>
                       </div>
                     </div>
                   </div>
@@ -179,9 +219,7 @@ export const ChangePassword: React.FC<Props> = ({ setUserInfoToFalse }) => {
             )}
           </>
         ) : (
-          <>
-            <MustLogin />
-          </>
+          <></>
         )}
       </>
     </Formik>
