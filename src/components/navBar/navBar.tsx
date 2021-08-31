@@ -65,7 +65,9 @@ export const NavBar: React.FC<Props> = ({
               {localStorageAdminIsAuthenticated ? (
                 <>
                   <div className="navBar">
-                    <div className="logo">Dev Mode</div>
+                    <Link to="/" className="logo">
+                      Dev Mode
+                    </Link>
                     <div className="navBarInfos">
                       <Link className="navInfo login" to="/categoriespage">
                         <p>add a question</p>
@@ -116,7 +118,9 @@ export const NavBar: React.FC<Props> = ({
               ) : (
                 <>
                   <div className="navBar">
-                    <div className="logo">Fill Your Mind</div>
+                    <Link to="/" className="logo">
+                      Fill Your Mind
+                    </Link>
                     <div className="navBarInfos">
                       <div
                         className="navInfo register"
@@ -167,7 +171,9 @@ export const NavBar: React.FC<Props> = ({
               {!localStorageIsAuthenticated &&
               !localStorageAdminIsAuthenticated ? (
                 <div className="navBar">
-                  <div className="logo">Fill Your Mind</div>
+                  <Link to="/" className="logo">
+                    Fill Your Mind
+                  </Link>
                   <div className="navBarInfos">
                     <Link className="navInfo login" to="/login">
                       <p>Login</p>

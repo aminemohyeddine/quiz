@@ -7,7 +7,9 @@
     "changepassword",
     "formik",
     "handler",
+    "heroku",
     "mohyeddine",
+    "postbuild",
     "questionsfield",
     "signup"
   ]
