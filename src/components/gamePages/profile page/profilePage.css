@@ -78,12 +78,24 @@
   border: 1px solid rgb(255, 51, 255);
   width: 20%;
 }
+.imageContainer {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .contentContainer {
   height: 400px;
-  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .categoriesMostPlayedContainer {
   border: 1px solid black;
+  height: 500px;
+  width: 100%;
 }
 .active {
   background-color: #ff99cc;
@@ -105,5 +117,25 @@
     width: 80%;
     height: 40vh;
     font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .contentContainer {
+    height: 350px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .imageContainer {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .dataItem {
+    font-size: 1rem;
   }
 }

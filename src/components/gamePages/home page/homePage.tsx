@@ -58,11 +58,15 @@ export const HomePage: React.FC<Props> = ({
         <div className="categoriesTitle">
           scroll left and right to check categories :
         </div>
-        <div className="categoriesImagesSlider">
-          <CategoriesHomePage
-            isCategoryInHomePage={isCategoryInHomePage}
-            setIsCategoryInHomePage={setIsCategoryInHomePage}
-          />
+        <div className="imC">
+          <div className="imageContainer">
+            <div className="categoriesImagesSlider">
+              <CategoriesHomePage
+                isCategoryInHomePage={isCategoryInHomePage}
+                setIsCategoryInHomePage={setIsCategoryInHomePage}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

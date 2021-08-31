@@ -78,6 +78,15 @@ export const LeftBar: React.FC<Props> = ({
             </Link>
             <Link
               onClick={() => {
+                setIsEditedClass(false);
+              }}
+              className="sideBar rules"
+              to="/categoriespage"
+            >
+              <p>add questions</p>
+            </Link>
+            <Link
+              onClick={() => {
                 logOutHandler();
                 setIsEditedClass(false);
               }}

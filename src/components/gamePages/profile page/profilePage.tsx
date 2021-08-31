@@ -215,10 +215,14 @@ export const ProfilePage: React.FC<profilePageProps> = ({
                               setUserInfoToFalse();
                             }}
                           >
-                            <CategoriesHomePage
-                              isCategoryInHomePage={isCategoryInHomePage}
-                              setIsCategoryInHomePage={setIsCategoryInHomePage}
-                            />
+                            <div className="imageContainer">
+                              <CategoriesHomePage
+                                isCategoryInHomePage={isCategoryInHomePage}
+                                setIsCategoryInHomePage={
+                                  setIsCategoryInHomePage
+                                }
+                              />
+                            </div>
                           </div>
                         </>
                       ) : (

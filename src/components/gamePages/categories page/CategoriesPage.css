@@ -1,11 +1,13 @@
 .categoriesContainer {
-  flex-wrap: wrap;
   margin-top: 20px;
   justify-content: center;
   display: flex;
 }
 .categoryName {
-  color: white;
+  color: black;
+}
+.categoriesTittle {
+  padding-top: 30px;
 }
 
 .container {
@@ -15,7 +17,7 @@
 
 .categoryLink {
   text-decoration: "none";
-  height: 200px;
+  height: 180px;
   width: 250px;
   cursor: pointer;
   margin-left: 20px;
@@ -37,12 +39,33 @@
 .categoryContainer {
 }
 .categoryLink:hover .categoryName {
-  color: yellow;
+  color: rgb(224, 224, 224);
 }
 .categoryName {
-  margin: 10px 0px 20px 0px;
+  margin: 10px 0px 10px 0px;
   text-align: center;
 }
-h1 {
-  text-align: center;
+.titleContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 800px) {
+  .categoriesTittle {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .categoriesTittle {
+    font-size: 1.2rem;
+  }
+  .categoriesContainer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .categoryLink {
+    margin-bottom: 20px;
+  }
 }

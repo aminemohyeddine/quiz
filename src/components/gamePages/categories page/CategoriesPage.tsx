@@ -30,7 +30,7 @@ export const CategoriesPage: React.FC<Props> = ({ setUserInfoToFalse }) => {
             }}
             className="container"
           >
-            <h1>Click on a category and play!</h1>
+            <h1 className="categoriesTitle">Click on a category and play!</h1>
             <div className="categoriesContainer">
               {categories.map((c) => {
                 const categoryUrl = "/game/" + c.categoryName;
@@ -61,7 +61,11 @@ export const CategoriesPage: React.FC<Props> = ({ setUserInfoToFalse }) => {
               setUserInfoToFalse();
             }}
           >
-            <h1>Click on a category and add questions!</h1>
+            <div className="titleContainer">
+              <h1 className="categoriesTittle">
+                Click on a category and add questions!
+              </h1>
+            </div>
             <div className="categoriesContainer">
               {categories.map((c) => {
                 const categoryUrl = "/dev/addquestion/" + c.categoryName;

@@ -36,7 +36,7 @@ export const ImageSlider = () => {
 
   return (
     <>
-      <div className="imageContaine">
+      <div className="imageContainer">
         <i
           className="fas fa-arrow-circle-left previousButton"
           onClick={() => {
